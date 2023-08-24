@@ -9,25 +9,21 @@ export default withAuth(
         const isAuth = await getToken({ req })
         const isSigninPage = pathname.startsWith('/signin')
 
-        const sensitiveRoutes = ['/dashboard']
+        const sensitiveRoutes = ['/chats', '/settings', '/notifications']
         const isAccessingSensitiveRoute = sensitiveRoutes.some((route) =>
             pathname.startsWith(route)
         )
 
         if (isSigninPage) {
             if (isAuth) {
-                return NextResponse.redirect(new URL('/dashboard', req.url))
+                return NextResponse.redirect(new URL('/', req.url))
             }
 
             return NextResponse.next()
         }
 
         if (!isAuth && isAccessingSensitiveRoute) {
-            return NextResponse.redirect(new URL('/signin', req.url))
-        }
-
-        if (pathname === '/') {
-            return NextResponse.redirect(new URL('/dashboard', req.url))
+            return NextResponse.redirect(new URL(`/signin`, req.url))
         }
     },
     {
@@ -40,5 +36,5 @@ export default withAuth(
 )
 
 export const config = {
-    matchter: ['/', '/signin', '/dashboard/:path*'],
+    matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api)(.*)"],
 }

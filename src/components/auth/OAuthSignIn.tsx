@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Icon, Icons } from "@/components/icons/icon";
+import { Icon, Icons } from "@/components/icon";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 
@@ -19,7 +19,6 @@ const OAuthSignIn = () => {
     const [isLoading, setIsLoading] = React.useState<string | null>(null)
 
     async function signInWithOauth(provider: string) {
-        toast.error("Something went wrong. Please try again later.")
         try {
             setIsLoading(provider);
             await signIn(provider, {
@@ -59,7 +58,6 @@ const OAuthSignIn = () => {
                     </Button>
                 )
             })}
-
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import OAuthSignIn from "@/components/auth/OAuthSignIn"
+import OAuthSignIn from "@/components/auth/oauthSignIn"
 import {
     Card,
     CardContent,
